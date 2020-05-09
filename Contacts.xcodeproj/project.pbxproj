@@ -17,6 +17,14 @@
 		9E7BD7AA24632E380061ED38 /* ImagesWebRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7BD7A924632E380061ED38 /* ImagesWebRepository.swift */; };
 		9E7BD7AD246405B80061ED38 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 9E7BD7AC246405B80061ED38 /* SDWebImage */; };
 		9E7BD7AF24649BFF0061ED38 /* ViewsDataHolder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E7BD7AE24649BFF0061ED38 /* ViewsDataHolder.swift */; };
+		9E96C9BC2466E71C00393ED3 /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E96C9BB2466E71C00393ED3 /* Defaults.swift */; };
+		9E96C9C224670C1C00393ED3 /* WebImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E96C9C124670C1C00393ED3 /* WebImageFetcher.swift */; };
+		9E96C9C424670E3900393ED3 /* MockWebImageFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E96C9C324670E3900393ED3 /* MockWebImageFetcher.swift */; };
+		9E96C9C62467137300393ED3 /* MockRandomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E96C9C52467137300393ED3 /* MockRandomizer.swift */; };
+		9E96C9C824671FBD00393ED3 /* IndexRandomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E96C9C724671FBD00393ED3 /* IndexRandomizer.swift */; };
+		9E96C9CA2467213A00393ED3 /* MockIndexRandomizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E96C9C92467213A00393ED3 /* MockIndexRandomizer.swift */; };
+		9E96C9CC2467260300393ED3 /* IndexRandomizerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E96C9CB2467260300393ED3 /* IndexRandomizerTest.swift */; };
+		9E96C9CE2467313F00393ED3 /* PersonTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E96C9CD2467313F00393ED3 /* PersonTest.swift */; };
 		9EC2E0C924609F1C004C49D6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC2E0C824609F1C004C49D6 /* AppDelegate.swift */; };
 		9EC2E0CB24609F1C004C49D6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC2E0CA24609F1C004C49D6 /* SceneDelegate.swift */; };
 		9EC2E0CD24609F1C004C49D6 /* PeopleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EC2E0CC24609F1C004C49D6 /* PeopleView.swift */; };
@@ -74,6 +82,14 @@
 		9E7BD7A72463298A0061ED38 /* PeopleRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleRepository.swift; sourceTree = "<group>"; };
 		9E7BD7A924632E380061ED38 /* ImagesWebRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesWebRepository.swift; sourceTree = "<group>"; };
 		9E7BD7AE24649BFF0061ED38 /* ViewsDataHolder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewsDataHolder.swift; sourceTree = "<group>"; };
+		9E96C9BB2466E71C00393ED3 /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
+		9E96C9C124670C1C00393ED3 /* WebImageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImageFetcher.swift; sourceTree = "<group>"; };
+		9E96C9C324670E3900393ED3 /* MockWebImageFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockWebImageFetcher.swift; sourceTree = "<group>"; };
+		9E96C9C52467137300393ED3 /* MockRandomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRandomizer.swift; sourceTree = "<group>"; };
+		9E96C9C724671FBD00393ED3 /* IndexRandomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexRandomizer.swift; sourceTree = "<group>"; };
+		9E96C9C92467213A00393ED3 /* MockIndexRandomizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockIndexRandomizer.swift; sourceTree = "<group>"; };
+		9E96C9CB2467260300393ED3 /* IndexRandomizerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexRandomizerTest.swift; sourceTree = "<group>"; };
+		9E96C9CD2467313F00393ED3 /* PersonTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonTest.swift; sourceTree = "<group>"; };
 		9EC2E0C524609F1C004C49D6 /* Contacts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Contacts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9EC2E0C824609F1C004C49D6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9EC2E0CA24609F1C004C49D6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -153,6 +169,14 @@
 			path = Repositories;
 			sourceTree = "<group>";
 		};
+		9E96C9BA2466E70B00393ED3 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				9E96C9BB2466E71C00393ED3 /* Defaults.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		9EC2E0BC24609F1C004C49D6 = {
 			isa = PBXGroup;
 			children = (
@@ -202,6 +226,7 @@
 				9EC2E0DF2460C1E0004C49D6 /* PreviewHelper.swift */,
 				9EFDBB482465C381001B3A0A /* QueuesHolder.swift */,
 				9EFDBB4A2465CDA7001B3A0A /* Randomizer.swift */,
+				9E96C9C724671FBD00393ED3 /* IndexRandomizer.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -215,6 +240,7 @@
 				9EFDBB41246585B9001B3A0A /* PeopleModifier.swift */,
 				9EFDBB4324658E66001B3A0A /* PeopleModificationRandomizer.swift */,
 				9EFDBB462465BF3D001B3A0A /* PeopleRandomizer.swift */,
+				9E96C9C124670C1C00393ED3 /* WebImageFetcher.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -264,6 +290,7 @@
 		9EFDBB532465EFBE001B3A0A /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				9E96C9BA2466E70B00393ED3 /* Helpers */,
 				9EFDBB7524661FF1001B3A0A /* Mocks */,
 				9EFDBB602465F11A001B3A0A /* Model */,
 				9EFDBB5E2465F030001B3A0A /* Repositories */,
@@ -286,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				9EFDBB702465F278001B3A0A /* RandomizerTest.swift */,
+				9E96C9CB2467260300393ED3 /* IndexRandomizerTest.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -306,6 +334,7 @@
 				9EFDBB6A2465F236001B3A0A /* PeopleModifierTest.swift */,
 				9EFDBB6C2465F24E001B3A0A /* PeopleModificationRandomizerTest.swift */,
 				9EFDBB6E2465F263001B3A0A /* PeopleRandomizerTest.swift */,
+				9E96C9CD2467313F00393ED3 /* PersonTest.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -322,6 +351,9 @@
 				9EFDBB82246628FA001B3A0A /* MockPeopleModificationRandomizer.swift */,
 				9EFDBB842466290B001B3A0A /* MockPeopleRandomizer.swift */,
 				9EFDBB862466291F001B3A0A /* MockQueuesHolder.swift */,
+				9E96C9C324670E3900393ED3 /* MockWebImageFetcher.swift */,
+				9E96C9C52467137300393ED3 /* MockRandomizer.swift */,
+				9E96C9C92467213A00393ED3 /* MockIndexRandomizer.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -440,6 +472,7 @@
 				9E7BD79F24631E4D0061ED38 /* DependenciesContainer.swift in Sources */,
 				9EFDBB492465C381001B3A0A /* QueuesHolder.swift in Sources */,
 				9EC2F4D72462B08200E7215A /* PeopleGridView.swift in Sources */,
+				9E96C9C824671FBD00393ED3 /* IndexRandomizer.swift in Sources */,
 				9E01CBA2246176BA00088368 /* DetailedInfoView.swift in Sources */,
 				9EFB4C552460E9E300BAABD7 /* PersonIconView.swift in Sources */,
 				9EFDBB472465BF3D001B3A0A /* PeopleRandomizer.swift in Sources */,
@@ -451,6 +484,7 @@
 				9EFDBB4D2465E902001B3A0A /* ListRowView.swift in Sources */,
 				9E7BD79D24631A290061ED38 /* ApplicationEnvironment.swift in Sources */,
 				9EC2E0CD24609F1C004C49D6 /* PeopleView.swift in Sources */,
+				9E96C9C224670C1C00393ED3 /* WebImageFetcher.swift in Sources */,
 				9EC2F4D92462B0C100E7215A /* SegmentedPickerView.swift in Sources */,
 				9EFDBB42246585B9001B3A0A /* PeopleModifier.swift in Sources */,
 				9E7BD7A52463260E0061ED38 /* PeopleInteractor.swift in Sources */,
@@ -471,17 +505,23 @@
 				9EFDBB872466291F001B3A0A /* MockQueuesHolder.swift in Sources */,
 				9EFDBB7724662048001B3A0A /* MockPeopleModifier.swift in Sources */,
 				9EFDBB792466212B001B3A0A /* Mock.swift in Sources */,
+				9E96C9CC2467260300393ED3 /* IndexRandomizerTest.swift in Sources */,
 				9EFDBB652465F1E4001B3A0A /* ImagesWebRepositoryTest.swift in Sources */,
 				9EFDBB672465F204001B3A0A /* PeopleInteractorTest.swift in Sources */,
 				9EFDBB7B2466281C001B3A0A /* MockPeopleRepository.swift in Sources */,
 				9EFDBB7F246628C8001B3A0A /* MockPeopleInteractor.swift in Sources */,
 				9EFDBB622465F1B3001B3A0A /* PeopleRepositoryTest.swift in Sources */,
+				9E96C9C424670E3900393ED3 /* MockWebImageFetcher.swift in Sources */,
 				9EFDBB6D2465F24E001B3A0A /* PeopleModificationRandomizerTest.swift in Sources */,
+				9E96C9CE2467313F00393ED3 /* PersonTest.swift in Sources */,
+				9E96C9BC2466E71C00393ED3 /* Defaults.swift in Sources */,
 				9EFDBB83246628FA001B3A0A /* MockPeopleModificationRandomizer.swift in Sources */,
 				9EFDBB692465F217001B3A0A /* ViewRouterTest.swift in Sources */,
 				9EFDBB6F2465F263001B3A0A /* PeopleRandomizerTest.swift in Sources */,
 				9EFDBB81246628E3001B3A0A /* MockViewsDataHolder.swift in Sources */,
+				9E96C9CA2467213A00393ED3 /* MockIndexRandomizer.swift in Sources */,
 				9EFDBB6B2465F236001B3A0A /* PeopleModifierTest.swift in Sources */,
+				9E96C9C62467137300393ED3 /* MockRandomizer.swift in Sources */,
 				9EFDBB7D24662834001B3A0A /* MockImagesWebRepository.swift in Sources */,
 				9EFDBB712465F278001B3A0A /* RandomizerTest.swift in Sources */,
 				9EFDBB852466290B001B3A0A /* MockPeopleRandomizer.swift in Sources */,

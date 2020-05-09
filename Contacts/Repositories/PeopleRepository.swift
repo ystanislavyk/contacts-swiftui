@@ -12,16 +12,18 @@ import UIKit
 typealias PersonData = (String, String)
 typealias PeopleData = [PersonData]
 
-let testPeopleData = [("John Wick", "JohnWick@email.com"),
-                      ("Jessica Alba", "JessicaAlba@email.com"),
-                      ("Brad Pitt", "BradPitt@email.com"),
-                      ("Charlize Theron", "CharlizeTheron@email.com"),
-                      ("Kirsten Dunst", "KirstenDunst@email.com"),
-                      ("Angelina Jolie", "AngelinaJolie@email.com"),
-                      ("Ellen Pompeo", "EllenPompeo@email.com"),
-                      ("Christian Bale", "ChristianBale@email.com"),
-                      ("Nicole Kidman", "NicoleKidman@email.com")
-                     ]
+let systemImageName = "person.crop.circle"
+
+fileprivate let testPeopleData = [("John Wick", "JohnWick@email.com"),
+                                  ("Jessica Alba", "JessicaAlba@email.com"),
+                                  ("Brad Pitt", "BradPitt@email.com"),
+                                  ("Charlize Theron", "CharlizeTheron@email.com"),
+                                  ("Kirsten Dunst", "KirstenDunst@email.com"),
+                                  ("Angelina Jolie", "AngelinaJolie@email.com"),
+                                  ("Ellen Pompeo", "EllenPompeo@email.com"),
+                                  ("Christian Bale", "ChristianBale@email.com"),
+                                  ("Nicole Kidman", "NicoleKidman@email.com")
+                                 ]
 
 protocol PeopleRepository {
     func loadPeople() -> AnyPublisher<People, Error>
@@ -30,11 +32,13 @@ protocol PeopleRepository {
 
 class RealPeopleRepository: PeopleRepository {
     private let imagesRepository: ImagesWebRepository
+    private let indexRandomizer: IndexRandomizer
     
     private var loadedPeople: People?
         
-    init(imagesRepository: ImagesWebRepository) {
+    init(imagesRepository: ImagesWebRepository, indexRandomizer: IndexRandomizer) {
         self.imagesRepository = imagesRepository
+        self.indexRandomizer = indexRandomizer
     }
     
     func loadPeople() -> AnyPublisher<People, Error> {
@@ -68,7 +72,7 @@ class RealPeopleRepository: PeopleRepository {
         var people = People()
         
         for person in testPeopleData {
-            people.append(Person(name: person.0, status: .online, email: person.1, image: UIImage(systemName: "person.crop.circle")!))
+            people.append(Person(name: person.0, status: .online, email: person.1, image: UIImage(systemName: systemImageName)!))
         }
         
         return people
@@ -78,7 +82,7 @@ class RealPeopleRepository: PeopleRepository {
         var people = People()
         
         for personData in testPeopleData {
-            let image = gravatarImages[randomIndex(limitedBy: gravatarImages.count)]
+            let image = gravatarImages[try! indexRandomizer.randomIndex(limitedBy: gravatarImages.count)]
             people.append(Person(name: personData.0, status: .online, email: personData.1, image: image))
         }
         

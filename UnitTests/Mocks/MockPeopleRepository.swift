@@ -18,11 +18,11 @@ class MockPeopleRepository: Mock<MockPeopleRepository.Actions>, PeopleRepository
     
     func loadPeople() -> AnyPublisher<People, Error> {
         registerCall(.loadPeople)
-        return Future<People, Error> { _ in }.eraseToAnyPublisher()
+        return returnValue[.loadPeople] as? AnyPublisher<People, Error> ?? Future<People, Error> { _ in }.eraseToAnyPublisher()
     }
     
     func loadPeopleData() -> PeopleData {
         registerCall(.loadPeopleData)
-        return PeopleData()
+        return returnValue[.loadPeopleData] as? PeopleData ?? PeopleData()
     }
 }

@@ -6,9 +6,58 @@
 //  Copyright © 2020 Yaroslav Stanislavyk. All rights reserved.
 //
 
-func randomIndex(limitedBy count: Int) -> Int {
-    if count <= 0 {
-        return 0
+import UIKit
+
+protocol Randomizer {
+    func randomPersonName() -> String?
+    func randomPersonData() -> PersonData?
+    func randomImage() -> UIImage?
+}
+
+class RealRandomizer: Randomizer {
+    private let peopleRepository: PeopleRepository
+    private let imagesRepository: ImagesWebRepository
+    private let indexRandomizer: IndexRandomizer
+    
+    init(peopleRepository: PeopleRepository, imagesRepository: ImagesWebRepository, indexRandomizer: IndexRandomizer) {
+        self.peopleRepository = peopleRepository
+        self.imagesRepository = imagesRepository
+        self.indexRandomizer = indexRandomizer
     }
-    return Int.random(in: 0...count - 1)
+    
+    func randomPersonName() -> String? {
+        let personData = randomPersonData()
+        if let personData = personData {
+            let personName = personData.0
+            return personName
+        }
+        
+        return nil
+    }
+    
+    func randomPersonData() -> PersonData? {
+        let peopleData = peopleRepository.loadPeopleData()
+        
+        guard !peopleData.isEmpty else {
+            return nil
+        }
+        
+        let personData = peopleData[try! indexRandomizer.randomIndex(limitedBy: peopleData.count)]
+        return personData
+    }
+    
+    func randomImage() -> UIImage? {
+        let images = imagesRepository.load()
+        
+        guard !images.isEmpty else {
+            return nil
+        }
+        
+        let image = images[try! indexRandomizer.randomIndex(limitedBy: images.count)]
+        return image
+    }
+}
+
+enum RandomizerError: Error {
+    case outOfBounds(String)
 }

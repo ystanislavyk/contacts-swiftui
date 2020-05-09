@@ -16,10 +16,12 @@ protocol PeopleRandomizer {
 }
 
 class RealPeopleRandomizer: PeopleRandomizer {
+    private let indexRandomizer: IndexRandomizer
     private let peopleModificationRandomizer: PeopleModificationRandomizer
     private let queuesHolder: QueuesHolder
     
-    init(peopleModificationRandomizer: PeopleModificationRandomizer, queuesHolder: QueuesHolder) {
+    init(indexRandomizer: IndexRandomizer, peopleModificationRandomizer: PeopleModificationRandomizer, queuesHolder: QueuesHolder) {
+        self.indexRandomizer = indexRandomizer
         self.peopleModificationRandomizer = peopleModificationRandomizer
         self.queuesHolder = queuesHolder
     }
@@ -47,7 +49,7 @@ class RealPeopleRandomizer: PeopleRandomizer {
         }
     }
     
-    func randomize(actions: Actions) {
-        actions[randomIndex(limitedBy: actions.count)]!()
+    private func randomize(actions: Actions) {
+        actions[try! indexRandomizer.randomIndex(limitedBy: actions.count)]!()
     }
 }

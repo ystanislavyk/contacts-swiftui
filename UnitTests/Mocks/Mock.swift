@@ -8,9 +8,12 @@
 
 import XCTest
 
-class Mock<Action> where Action: Equatable {
+class Mock<Action> where Action: Equatable & Hashable {
     private var registeredCalls = [Action]()
     private var expectedCalls = [Action]()
+    private var expectedCallsAtLeastOnce = [Action]()
+    
+    private(set) var returnValue = [Action:Any]()
     
     final func registerCall(_ action: Action) {
         compareExpectedCalls(with: action)
@@ -26,7 +29,15 @@ class Mock<Action> where Action: Equatable {
         }
     }
     
-    final func verifyAllCalls() {
+    final func expectCallAtLeastOnce(_ action: Action) {
+        expectedCallsAtLeastOnce.append(action)
+    }
+    
+    final func returns(value: Any, forAction action: Action) {
+        returnValue[action] = value
+    }
+    
+    final func verifyCalls() {
         if !expectedCalls.isEmpty {
             var remainingCalls: String = ""
             for call in expectedCalls {
@@ -37,6 +48,10 @@ class Mock<Action> where Action: Equatable {
     }
     
     private func compareExpectedCalls(with action: Action) {
+        guard expectedCallsAtLeastOnce.firstIndex(of: action) == nil else {
+            return
+        }
+        
         if let index = expectedCalls.firstIndex(of: action) {
             expectedCalls.remove(at: index)
         } else {
