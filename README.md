@@ -6,7 +6,7 @@ The main idea of the project is a creation of the iOS app in accordance to Clean
 
 Inspired by [Clean Architecture for SwiftUI](https://nalexn.github.io/clean-architecture-swiftui/?utm_source=nalexn_github) article.
 
-[![Build Status](https://travis-ci.org/Morheit/contacts-swiftui.svg?branch=master)](https://travis-ci.org/Morheit/contacts-swiftui) <!--[![codecov](https://codecov.io/gh/Morheit/contacts-swiftui/branch/master/graph/badge.svg)](https://codecov.io/gh/Morheit/contacts-swiftui)--> [![codebeat badge](https://codebeat.co/badges/540330a9-e112-457c-a93f-46ac1fb22f38)](https://codebeat.co/projects/github-com-morheit-contacts-swiftui-master)
+[![Build Status](https://travis-ci.org/Morheit/contacts-swiftui.svg?branch=master)](https://travis-ci.org/Morheit/contacts-swiftui) [![codecov](https://codecov.io/gh/Morheit/contacts-swiftui/branch/master/graph/badge.svg)](https://codecov.io/gh/Morheit/contacts-swiftui) [![codebeat badge](https://codebeat.co/badges/540330a9-e112-457c-a93f-46ac1fb22f38)](https://codebeat.co/projects/github-com-morheit-contacts-swiftui-master)
 
 ## Overview
 
