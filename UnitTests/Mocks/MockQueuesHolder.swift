@@ -18,11 +18,11 @@ class MockQueuesHolder: Mock<MockQueuesHolder.Actions>, QueuesHolder {
     
     func backgroundQueue() -> DispatchQueue {
         registerCall(.backgroundQueue)
-        return DispatchQueue(label: "")
+        return returnValue[.backgroundQueue] as? DispatchQueue ?? DispatchQueue(label: "")
     }
     
     func randomizationQueue() -> DispatchQueue {
         registerCall(.randomizationQueue)
-        return DispatchQueue(label: "")
+        return returnValue[.randomizationQueue] as? DispatchQueue ?? DispatchQueue(label: "")
     }
 }

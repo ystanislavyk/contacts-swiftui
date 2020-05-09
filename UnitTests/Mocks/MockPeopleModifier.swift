@@ -35,6 +35,6 @@ class MockPeopleModifier: Mock<MockPeopleModifier.Actions>, PeopleModifier {
     
     func peopleCount() -> Int {
         registerCall(.peopleCount)
-        return 0
+        return returnValue[.peopleCount] as? Int ?? 0
     }
 }

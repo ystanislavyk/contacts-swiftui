@@ -17,62 +17,47 @@ protocol PeopleModificationRandomizer {
 
 class RealPeopleModificationRandomizer: PeopleModificationRandomizer {
     private let peopleModifier: PeopleModifier
-    private let peopleRepository: PeopleRepository
-    private let imagesRepository: ImagesWebRepository
+    private let indexRandomizer: IndexRandomizer
+    private let randomizer: Randomizer
     
-    init(peopleModifier: PeopleModifier, peopleRepository: PeopleRepository, imagesRepository: ImagesWebRepository) {
+    init(peopleModifier: PeopleModifier, indexRandomizer: IndexRandomizer, randomizer: Randomizer) {
         self.peopleModifier = peopleModifier
-        self.peopleRepository = peopleRepository
-        self.imagesRepository = imagesRepository
+        self.indexRandomizer = indexRandomizer
+        self.randomizer = randomizer
     }
     
     func randomStatusModification() {
-        peopleModifier.changeStatusOfPerson(with: randomIndex(limitedBy: peopleModifier.peopleCount()))
+        let peopleCount = peopleModifier.peopleCount()
+        guard peopleCount >= 1 else {
+            return
+        }
+        
+        peopleModifier.changeStatusOfPerson(with: try! indexRandomizer.randomIndex(limitedBy: peopleCount))
     }
     
     func randomNameModification() {
-        peopleModifier.changeNameOfPerson(with: randomIndex(limitedBy: peopleModifier.peopleCount()), to: randomPersonName())
+        let peopleCount = peopleModifier.peopleCount()
+        guard peopleCount >= 1 else {
+            return
+        }
+        
+        peopleModifier.changeNameOfPerson(with: try! indexRandomizer.randomIndex(limitedBy: peopleCount), to: randomizer.randomPersonName()!)
     }
     
     func randomDeletion() {
-        peopleModifier.remove(personAt: randomIndex(limitedBy: peopleModifier.peopleCount()))
+        let peopleCount = peopleModifier.peopleCount()
+        guard peopleCount >= 1 else {
+            return
+        }
+        
+        peopleModifier.remove(personAt: try! indexRandomizer.randomIndex(limitedBy: peopleCount))
     }
     
     func randomAdding() {
-        let personData = randomPersonData()
+        let personData = randomizer.randomPersonData()!
         let personName = personData.0
         let personEmail = personData.1
-        let image = randomImage()
+        let image = randomizer.randomImage()!
         peopleModifier.add(person: Person(name: personName, status: .online, email: personEmail, image: image))
-    }
-    
-    private func randomPersonName() -> String {
-        let personData = randomPersonData()
-        let personName = personData.0
-        return personName
-    }
-    
-    private func randomPersonData() -> PersonData {
-        let peopleData = peopleRepository.loadPeopleData()
-        
-        // Strange. Better to avoid call to a randomPersonData() if we don't have data at all
-        guard !peopleData.isEmpty else {
-            return PersonData("", "")
-        }
-        
-        let personData = peopleData[randomIndex(limitedBy: peopleData.count)]
-        return personData
-    }
-    
-    private func randomImage() -> UIImage {
-        let images = imagesRepository.load()
-        
-        // Strange. Better to avoid call to a randomImage() if we don't have data at all
-        guard !images.isEmpty else {
-            return UIImage()
-        }
-        
-        let image = images[randomIndex(limitedBy: images.count)]
-        return image
     }
 }

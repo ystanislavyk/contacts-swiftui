@@ -17,6 +17,6 @@ class MockImagesWebRepository: Mock<MockImagesWebRepository.Actions>, ImagesWebR
     
     func load() -> [UIImage] {
         registerCall(.load)
-        return [UIImage]()
+        return returnValue[.load] as? [UIImage] ?? [UIImage]()
     }
 }

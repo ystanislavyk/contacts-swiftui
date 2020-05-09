@@ -7,11 +7,26 @@
 //
 
 import XCTest
+import SDWebImage
 
 @testable import Contacts
 
 class ImagesWebRepositoryTest: XCTestCase {
+    private var mockWebImageFetcher: MockWebImageFetcher!
+    
+    private var imagesWebRepository: RealImagesWebRepository!
 
-    // TODO
-
+    override func setUp() {
+        mockWebImageFetcher = MockWebImageFetcher()
+        imagesWebRepository = RealImagesWebRepository(webImagesFetcher: mockWebImageFetcher)
+    }
+    
+    override func tearDown() {
+        mockWebImageFetcher.verifyCalls()
+    }
+    
+    func test_load() throws {
+        mockWebImageFetcher.expectCall(.loadImages)
+        _ = imagesWebRepository.load()
+    }
 }

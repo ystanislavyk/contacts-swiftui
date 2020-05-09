@@ -11,10 +11,13 @@ import XCTest
 @testable import Contacts
 
 class ViewRouterTest: XCTestCase {
+    private var viewsDataHolder: RealViewsDataHolder!
+    
     private var viewRouter: ViewRouter!
 
     override func setUp() {
-        viewRouter = ViewRouter(viewsDataHolder: RealViewsDataHolder())
+        viewsDataHolder = RealViewsDataHolder()
+        viewRouter = ViewRouter(viewsDataHolder: viewsDataHolder)
     }
     
     func test_viewRouter_peopleViewIsDefaultView() throws {
@@ -29,6 +32,13 @@ class ViewRouterTest: XCTestCase {
         viewRouter.routeTo(view: .peopleView)
         
         XCTAssertEqual(viewRouter.currentView, ViewRouter.View.peopleView)
+    }
+    
+    func test_viewRouter_routeToViewWithData() throws {
+        let person = Person(name: "John", status: .offline, email: "John@email.com", image: UIImage())
+        viewRouter.routeTo(view: .detailedInfoView, with: person)
+        
+        XCTAssertEqual(viewsDataHolder.detailedInfoView().person, person)
     }
 
 }

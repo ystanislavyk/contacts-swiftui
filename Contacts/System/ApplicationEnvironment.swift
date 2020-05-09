@@ -17,15 +17,18 @@ class ApplicationEnvironment {
 extension ApplicationEnvironment {
     class func initialize() -> ApplicationEnvironment {
         let queuesHolder = RealQueuesHolder()
-        let imagesWebRepository = RealImagesWebRepository()
-        let peopleRepository = RealPeopleRepository(imagesRepository: imagesWebRepository)
+        let webImagesFetcher = RealWebImageFetcher()
+        let imagesWebRepository = RealImagesWebRepository(webImagesFetcher: webImagesFetcher)
+        let indexRandomizer = RealIndexRandomizer()
+        let peopleRepository = RealPeopleRepository(imagesRepository: imagesWebRepository, indexRandomizer: indexRandomizer)
         
         let viewsDataHolder = RealViewsDataHolder()
         let viewRouter = ViewRouter(viewsDataHolder: viewsDataHolder)
         
         let peopleModifier = RealPeopleModifier(data: viewsDataHolder.peopleView())
-        let peopleModificationRandomizer = RealPeopleModificationRandomizer(peopleModifier: peopleModifier, peopleRepository: peopleRepository, imagesRepository: imagesWebRepository)
-        let peopleRandomizer = RealPeopleRandomizer(peopleModificationRandomizer: peopleModificationRandomizer, queuesHolder: queuesHolder)
+        let randomizer = RealRandomizer(peopleRepository: peopleRepository, imagesRepository: imagesWebRepository, indexRandomizer: indexRandomizer)
+        let peopleModificationRandomizer = RealPeopleModificationRandomizer(peopleModifier: peopleModifier, indexRandomizer: indexRandomizer, randomizer: randomizer)
+        let peopleRandomizer = RealPeopleRandomizer(indexRandomizer: indexRandomizer, peopleModificationRandomizer: peopleModificationRandomizer, queuesHolder: queuesHolder)
         
         let peopleInteractor = RealPeopleInteractor(peopleRepository: peopleRepository, peopleRandomizer: peopleRandomizer, queuesHolder: queuesHolder)
         let interactors = DependenciesContainer.Interactors(peopleInteractor: peopleInteractor)

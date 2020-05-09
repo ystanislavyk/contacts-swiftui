@@ -63,6 +63,6 @@ extension PeopleView {
 
 struct PeopleView_Previews: PreviewProvider {
     static var previews: some View {
-        PeopleView(data: PeopleView.Data(), interactor: RealPeopleInteractor(peopleRepository: RealPeopleRepository(imagesRepository: RealImagesWebRepository()), peopleRandomizer: RealPeopleRandomizer(peopleModificationRandomizer: RealPeopleModificationRandomizer(peopleModifier: RealPeopleModifier(data: PeopleView.Data()), peopleRepository: RealPeopleRepository(imagesRepository: RealImagesWebRepository()), imagesRepository: RealImagesWebRepository()), queuesHolder: RealQueuesHolder()), queuesHolder: RealQueuesHolder()))
+        PeopleView(data: PeopleView.Data(), interactor: RealPeopleInteractor(peopleRepository: RealPeopleRepository(imagesRepository: RealImagesWebRepository(webImagesFetcher: RealWebImageFetcher()), indexRandomizer: RealIndexRandomizer()), peopleRandomizer: RealPeopleRandomizer(indexRandomizer: RealIndexRandomizer(), peopleModificationRandomizer: RealPeopleModificationRandomizer(peopleModifier: RealPeopleModifier(data: PeopleView.Data()), indexRandomizer: RealIndexRandomizer(), randomizer: RealRandomizer(peopleRepository: RealPeopleRepository(imagesRepository: RealImagesWebRepository(webImagesFetcher: RealWebImageFetcher()), indexRandomizer: RealIndexRandomizer()), imagesRepository: RealImagesWebRepository(webImagesFetcher: RealWebImageFetcher()), indexRandomizer: RealIndexRandomizer())), queuesHolder: RealQueuesHolder()), queuesHolder: RealQueuesHolder()))
     }
 }

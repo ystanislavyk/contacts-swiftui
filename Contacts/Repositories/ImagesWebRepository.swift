@@ -23,23 +23,14 @@ protocol ImagesWebRepository {
 }
 
 class RealImagesWebRepository: ImagesWebRepository {
+    private let webImageFetcher: WebImageFetcher
+    
+    init(webImagesFetcher: WebImageFetcher) {
+        self.webImageFetcher = webImagesFetcher
+    }
+    
     func load() -> [UIImage] {
-        let dispatchGroup = DispatchGroup()
-        let webImageManager = SDWebImageManager()
-        
-        var images = [UIImage]()
-        
-        for url in gravatarDefaultImagesURLs {
-            dispatchGroup.enter()
-            webImageManager.loadImage(with: URL(string: url), options: SDWebImageOptions(rawValue: 0), progress: nil, completed: { image, error ,_,_,_,_ in
-                if let image = image {
-                    images.append(image)
-                }
-                dispatchGroup.leave()
-            })
-            dispatchGroup.wait()
-        }
-        
+        let images = webImageFetcher.loadImages(imagesURLs: gravatarDefaultImagesURLs)
         return images
     }
 }

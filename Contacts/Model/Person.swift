@@ -12,6 +12,25 @@ import SwiftUI
 typealias People = [Person]
 
 class Person: Identifiable, ObservableObject {
+    let id = UUID()
+    @Published var name: String
+    @Published var status: Status
+    @Published var email: String
+    @Published var image: UIImage
+    
+    init(name: String, status: Status, email: String, image: UIImage) {
+        self.name = name
+        self.status = status
+        self.email = email
+        self.image = image
+    }
+    
+    convenience init() {
+        self.init(name: "", status: .online, email: "", image: UIImage())
+    }
+}
+
+extension Person {
     enum Status {
         case offline
         case online
@@ -43,21 +62,13 @@ class Person: Identifiable, ObservableObject {
             }
         }
     }
-    
-    init(name: String, status: Status, email: String, image: UIImage) {
-        self.name = name
-        self.status = status
-        self.email = email
-        self.image = image
+}
+
+extension Person: Equatable {
+    public static func ==(lhs: Person, rhs: Person) -> Bool {
+        return (lhs.name == rhs.name) &&
+               (lhs.status == rhs.status) &&
+               (lhs.email == rhs.email) &&
+               (lhs.image == rhs.image)
     }
-    
-    convenience init() {
-        self.init(name: "", status: .online, email: "", image: UIImage())
-    }
-    
-    let id = UUID()
-    @Published var name: String
-    @Published var status: Status
-    @Published var email: String
-    @Published var image: UIImage
 }

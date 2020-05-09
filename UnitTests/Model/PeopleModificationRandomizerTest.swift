@@ -12,49 +12,76 @@ import XCTest
 
 class PeopleModificationRandomizerTest: XCTestCase {
     private var mockPeopleModifier: MockPeopleModifier!
-    private var mockPeopleRepository: MockPeopleRepository!
-    private var mockImagesWebRepository: MockImagesWebRepository!
+    private var mockIndexRandomizer: MockIndexRandomizer!
+    private var mockRandomizer: MockRandomizer!
     
     private var peopleModificationRandomizer: RealPeopleModificationRandomizer!
 
     override func setUp() {
         mockPeopleModifier = MockPeopleModifier()
-        mockPeopleRepository = MockPeopleRepository()
-        mockImagesWebRepository = MockImagesWebRepository()
+        mockIndexRandomizer = MockIndexRandomizer()
+        mockRandomizer = MockRandomizer()
         
-        peopleModificationRandomizer = RealPeopleModificationRandomizer(peopleModifier: mockPeopleModifier!, peopleRepository: mockPeopleRepository!, imagesRepository: mockImagesWebRepository!)
+        peopleModificationRandomizer = RealPeopleModificationRandomizer(peopleModifier: mockPeopleModifier, indexRandomizer: mockIndexRandomizer, randomizer: mockRandomizer)
     }
     
     override func tearDown() {
-        mockPeopleModifier.verifyAllCalls()
+        mockPeopleModifier.verifyCalls()
+        mockRandomizer.verifyCalls()
     }
     
-    func test_randomStatusModification() throws {
+    func test_randomStatusModification_called() throws {
+        mockIndexRandomizer.expectCall(.randomIndex)
+        mockPeopleModifier.returns(value: 1, forAction: .peopleCount)
         mockPeopleModifier.expectCall(.peopleCount)
         mockPeopleModifier.expectCall(.changeStatusOfPerson)
         
         peopleModificationRandomizer.randomStatusModification()
     }
     
-    func test_randomNameModification() throws {
-        mockPeopleRepository.expectCall(.loadPeopleData)
+    func test_randomStatusModification_notCalled() throws {
+        mockPeopleModifier.returns(value: 0, forAction: .peopleCount)
+        mockPeopleModifier.expectCall(.peopleCount)
         
+        peopleModificationRandomizer.randomStatusModification()
+    }
+    
+    func test_randomNameModification_called() throws {
+        mockIndexRandomizer.expectCall(.randomIndex)
+        mockRandomizer.expectCall(.randomPersonName)
+        mockPeopleModifier.returns(value: 1, forAction: .peopleCount)
         mockPeopleModifier.expectCall(.peopleCount)
         mockPeopleModifier.expectCall(.changeNameOfPerson)
         
         peopleModificationRandomizer.randomNameModification()
     }
     
-    func test_randomDeletion() throws {
+    func test_randomNameModification_notCalled() throws {        
+        mockPeopleModifier.returns(value: 0, forAction: .peopleCount)
+        mockPeopleModifier.expectCall(.peopleCount)
+        
+        peopleModificationRandomizer.randomNameModification()
+    }
+    
+    func test_randomDeletion_called() throws {
+        mockIndexRandomizer.expectCall(.randomIndex)
+        mockPeopleModifier.returns(value: 1, forAction: .peopleCount)
         mockPeopleModifier.expectCall(.peopleCount)
         mockPeopleModifier.expectCall(.removePersonAtIndex)
         
         peopleModificationRandomizer.randomDeletion()
     }
     
+    func test_randomDeletion_notCalled() throws {
+        mockPeopleModifier.returns(value: 0, forAction: .peopleCount)
+        mockPeopleModifier.expectCall(.peopleCount)
+        
+        peopleModificationRandomizer.randomDeletion()
+    }
+    
     func test_randomAdding() throws {
-        mockPeopleRepository.expectCall(.loadPeopleData)
-        mockImagesWebRepository.expectCall(.load)
+        mockRandomizer.expectCall(.randomPersonData)
+        mockRandomizer.expectCall(.randomImage)
         mockPeopleModifier.expectCall(.addPerson)
         
         peopleModificationRandomizer.randomAdding()
