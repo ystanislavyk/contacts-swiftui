@@ -39,7 +39,7 @@ class PeopleRepositoryTest: XCTestCase {
         let people = loadPeople()
         
         XCTAssertFalse(people.isEmpty)
-        XCTAssertNotEqual(people.first!.image, UIImage(systemName: systemImageName))
+        XCTAssertNotEqual(people.first!.image, UIImage(systemName: kSystemImageName))
     }
     
     func test_loadPeople_peopleWithSystemImagesLoaded() throws {
@@ -49,7 +49,7 @@ class PeopleRepositoryTest: XCTestCase {
         let people = loadPeople()
         
         XCTAssertFalse(people.isEmpty)
-        XCTAssertEqual(people.first!.image, UIImage(systemName: systemImageName))
+        XCTAssertEqual(people.first!.image, UIImage(systemName: kSystemImageName))
     }
     
     func test_loadPeople_cachedPeopleLoaded() throws {

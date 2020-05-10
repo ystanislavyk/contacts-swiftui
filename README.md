@@ -31,6 +31,5 @@ The dependencies are installed via the [Swift Package Manager](https://swift.org
 
 ## TODO's
 
-* Coverage of remaining UT
 * Documentation adding
 * `TODO` keywords elimination
